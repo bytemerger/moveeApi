@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const comments = require('../controllers/comment.js')
-router.use(comments);
+const movie = require('./movieRoute')
+router.use(movie);
 
-export default router;
+module.exports=router
