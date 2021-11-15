@@ -1,15 +1,12 @@
-const fetch = require('node-fetch');
-
+const createError = require('http-errors');
+const { getMoviesList } = require('../services/movieService');
 async function getAllMovies(req, res) {
-    const response = await fetch('https://swapi.dev/api/films/');
-    const data = (await response.json()).results;
-    data.sort(function(a,b){
-        return new Date(a.release_date) - new Date(b.release_date);
-      });
-    let ndata = data.map(element => {
-        return (({ title, opening_crawl, release_date}) => ({ title, opening_crawl, release_date}))(element)
-    });
-    return res.status(200).json({ data: ndata });
+    try {
+        let ndata = await getMoviesList();
+        return res.status(200).json({ data: ndata });
+    } catch (error) {
+        throw createError(error);
+    }
 }
 
 module.exports = {
