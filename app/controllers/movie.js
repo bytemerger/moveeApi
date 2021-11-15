@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const { getMoviesList, addMovieComment } = require('../services/movieService');
 const { createComment, listComments } = require('../services/commentService');
 
-async function getAllMovies(req, res) {
+async function getAllMovies(req, res, next) {
     try {
         let ndata = await getMoviesList();
         return res.status(200).json({ data: ndata });
