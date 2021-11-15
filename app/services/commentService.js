@@ -14,7 +14,8 @@ async function listComments(id){
         let newComment = await models.comment.findAll({
             where: {
               movieId: id
-            }
+            },
+            order: [["createdAt", 'DESC']]
           });
         return newComment;
     } catch (error) {
