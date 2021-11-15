@@ -1,6 +1,6 @@
 const config = require('./secret');
 
-export const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
     const { statusCode, message } = err;
 
     const response = {
@@ -15,3 +15,5 @@ export const errorHandler = (err, req, res, next) => {
 
     return res.status(statusCode).json(response);
 };
+
+module.exports = errorHandler

@@ -7,16 +7,18 @@ async function getAllMovies(req, res) {
         let ndata = await getMoviesList();
         return res.status(200).json({ data: ndata });
     } catch (error) {
-        throw createError(error);
+        error = createError(error);
+        next(error);
     }
 }
-async function addMoviesComment(req, res) {
+async function addMoviesComment(req, res, next) {
     console.log(req.param.id);
     try {
         let comment = await createComment(req.params.id, req.body);
         return res.status(200).json({ data: comment });
     } catch (error) {
-        throw createError(error);
+        error = createError(error);
+        next(error);
     }
 }
 
