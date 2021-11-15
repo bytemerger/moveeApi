@@ -7,4 +7,4 @@ const config = {
     MYSQL_DB_USER: process.env.MYSQL_DB_USER,
 };
 
-export default config;
+module.exports = config;

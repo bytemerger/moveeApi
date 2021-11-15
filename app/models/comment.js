@@ -1,11 +1,14 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../../config/db');
-
-const Comment = sequelize.define('Comment', {
+// const sequelize = require('../../config/db');
+module.exports = (sequelize) => {
+    const Comment = sequelize.define('Comment', {
     // Model attributes are defined here
     IP: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    movieId:{
+         type: DataTypes.INTEGER,
     },
     commenter: {
       type: DataTypes.STRING,
@@ -20,5 +23,5 @@ const Comment = sequelize.define('Comment', {
     timestamps: true,
     updatedAt:false
   });
-
-  export default Comment
+  return Comment
+}

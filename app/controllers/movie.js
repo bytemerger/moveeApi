@@ -1,5 +1,7 @@
 const createError = require('http-errors');
-const { getMoviesList } = require('../services/movieService');
+const { getMoviesList, addMovieComment } = require('../services/movieService');
+const { createComment } = require('../services/commentService');
+
 async function getAllMovies(req, res) {
     try {
         let ndata = await getMoviesList();
@@ -8,7 +10,17 @@ async function getAllMovies(req, res) {
         throw createError(error);
     }
 }
+async function addMoviesComment(req, res) {
+    console.log(req.param.id);
+    try {
+        let comment = await createComment(req.params.id, req.body);
+        return res.status(200).json({ data: comment });
+    } catch (error) {
+        throw createError(error);
+    }
+}
 
 module.exports = {
-    getAllMovies
+    getAllMovies,
+    addMoviesComment
 }
