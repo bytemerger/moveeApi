@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 // const sequelize = require('../../config/db');
 module.exports = (sequelize) => {
-    const Comment = sequelize.define('Comment', {
+    const comment = sequelize.define('comment', {
     // Model attributes are defined here
     IP: {
       type: DataTypes.STRING,
@@ -23,5 +23,5 @@ module.exports = (sequelize) => {
     timestamps: true,
     updatedAt:false
   });
-  return Comment
+  return comment
 }
