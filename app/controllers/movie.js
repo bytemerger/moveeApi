@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const Validator = require('validatorjs');
 const { getMoviesList, addMovieComment } = require('../services/movieService');
 const { createComment, listComments } = require('../services/commentService');
 
@@ -12,7 +13,23 @@ async function getAllMovies(req, res, next) {
     }
 }
 async function addMoviesComment(req, res, next) {
-    console.log(req.param.id);
+    let id = req.params.id;
+    let validation = new Validator({id}, {
+        id: 'required|integer'
+    });
+    if(validation.fails()){
+        let error = createError(400, { message: validation.errors.all() })
+        next(error)
+    }
+    let formValidation = new Validator(req.body, {
+        IP: 'required|string',
+        body: 'required|string|max:500',
+        commenter: 'required|string',
+    })
+    if(formValidation.fails()){
+        let error = createError(400, { message: formValidation.errors.all() })
+        next(error)
+    }
     try {
         let comment = await createComment(req.params.id, req.body);
         return res.status(200).json({ data: comment });
@@ -22,7 +39,14 @@ async function addMoviesComment(req, res, next) {
     }
 }
 async function getMoviesComments(req, res, next) {
-    console.log(req.param.id);
+    let id = req.params.id;
+    let validation = new Validator({id}, {
+        id: 'required|integer'
+    });
+    if(validation.fails()){
+        let error = createError(400, { message: validation.errors.all() })
+        next(error)
+    }
     try {
         let comment = await listComments(req.params.id);
         return res.status(200).json({ data: comment });

@@ -22,7 +22,8 @@
     "http-errors": "^1.8.1",
     "mysql2": "^2.3.3",
     "node-fetch": "^2.6.1",
-    "sequelize": "^6.9.0"
+    "sequelize": "^6.9.0",
+    "validatorjs": "^3.22.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
