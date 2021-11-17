@@ -16,9 +16,9 @@ sequelize.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 
-(async () => {
+/* (async () => {
     await sequelize.sync({ force: true });
-})();
+})(); */
 module.exports = {
   sequelize,
   getAsync

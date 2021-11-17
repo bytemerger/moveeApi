@@ -4,6 +4,6 @@ const sequelize = new Sequelize(config.MYSQL_DATABASE_URL);
 
 require('./comment')(sequelize);
 (async () => {
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
 })();
 module.exports = sequelize
