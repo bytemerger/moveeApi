@@ -1,9 +1,9 @@
 const fetch = require('node-fetch');
 const { models } = require('../models/index')
+const { getAsync } = require('../../config/db');
 
 async function getMoviesList(){
-    const response = await fetch('https://swapi.dev/api/films/');
-    const data = (await response.json()).results;
+    const data = JSON.parse(await getAsync('movies'));
     data.sort(function(a,b){
         return new Date(a.release_date) - new Date(b.release_date);
         });
