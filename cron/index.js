@@ -1,9 +1,9 @@
 const redis = require('redis');
 const promisify = require('util').promisify;
 const { fetchLoop } = require('../app/helpers/index');
+const {setAsync} = require('../config/db');
 
 const client = redis.createClient();
-const setAsync = promisify(client.set).bind(client);
 
 async function getData(){
     const characters = await fetchLoop('https://swapi.dev/api/people/');

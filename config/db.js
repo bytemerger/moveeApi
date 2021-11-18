@@ -3,8 +3,12 @@ const promisify = require('util').promisify;
 const config = require('./secret');
 const Sequelize = require('sequelize');
 
-const clients = redis.createClient();
-const getAsync = promisify(clients.get).bind(clients);
+const client = redis.createClient({
+  host: config.REDIS_HOST,
+  port: config.REDIS_PORT
+});
+const getAsync = promisify(client.get).bind(client);
+const setAsync = promisify(client.set).bind(client);
 
 
 const sequelize = new Sequelize(config.MYSQL_DATABASE_URL);
@@ -21,5 +25,6 @@ sequelize.authenticate()
 })(); */
 module.exports = {
   sequelize,
-  getAsync
+  getAsync,
+  setAsync
 };
