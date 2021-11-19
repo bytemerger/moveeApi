@@ -8,10 +8,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
-    ports:
-      - 3307:3306
     volumes:
-      - db:/var/lib/mysql
+      - /db:/var/lib/mysql
   app:
     depends_on:
       - mysqldb
@@ -20,16 +18,12 @@ services:
     restart: unless-stopped
     env_file: .env
     ports:
-      - 8003:3000
+      - 3000:3000
     environment:
       - MYSQL_DATABASE_URL=$MYSQL_DATABASE_URL
       - REDIS_PORT=$REDIS_PORT
+      - REDIS_HOST=$REDIS_HOST
     stdin_open: true
     tty: true
   redis:
     image: redis:alpine
-    ports:
-      - 6378:6379
-
-volumes: 
-  db:
